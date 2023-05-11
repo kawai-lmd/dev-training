@@ -12,7 +12,7 @@ import os
 class Discriminator(nn.Module):
     def __init__(self, batch_size):
         self.batch_size = batch_size
-        
+
         super(Discriminator, self).__init__()
         self.conv1 = nn.Conv2d(3, 32, kernel_size=3, padding=1)
         self.bn1 = nn.BatchNorm2d(32)
@@ -23,7 +23,7 @@ class Discriminator(nn.Module):
         self.conv4 = nn.Conv2d(128, 256, kernel_size=3, padding=1)
         self.bn4 = nn.BatchNorm2d(256)
         self.fc = nn.Linear(256*2*2, 1)
-        
+
     def forward(self, x):
         x = F.avg_pool2d(F.leaky_relu(self.bn1(self.conv1(x)), 0.2, inplace=True), 2)
         x = F.avg_pool2d(F.leaky_relu(self.bn2(self.conv2(x)), 0.2, inplace=True), 2)
